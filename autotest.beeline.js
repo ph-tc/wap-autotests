@@ -193,7 +193,7 @@ console.info('Все картинки и шрифты в одном файле �
 
 const head = document.querySelector('head');
 const title = "<title th:text=\"${isWebRequest} == false ? 'Подтверждение оплаты с баланса телефона' : 'Подтверждение оплаты с баланса телефона шаг 2 из 2'\">Подтверждение оплаты с баланса телефона</title>";
-const headMeta1 = "<meta th:if=\"${isWebRequest} == false\" name=\"viewport\" content=\"width=device-width,initial-scale=1,user-scalable=yes\">";
+const headMeta1 = "<meta th:if=\"${isWebRequest} == false\" name=\"viewport\" content=\"width=device-width,initial-scale=1,user-scalable=no\">";
 const headMeta2 = "<meta th:if=\"${isWebRequest} == false\" name=\"MobileOptimized\" content=\"width\">";
 const headMeta3 = "<meta th:if=\"${isWebRequest} == false\" name=\"HandheldFriendly\" content=\"true\">";
 const headMeta4 = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">";
