@@ -262,17 +262,6 @@ if ( btns.length !== 1 ) {
 	console.log(`Одна кнопка на странице - ок`);
 }
 
-// проверка наличия скрипта после тега btnTextStyles
-
-const headStyleTag = document.querySelector('style');
-
-if ( headStyleTag.nextElementSibling.tagName === 'SCRIPT' &&
-		 headStyleTag.nextElementSibling.src === 'http://cdp.beeline.ru/scripts/script.js' ) {
-	console.log(`скрипт после тега style - ок`);
-} else {
-	console.error(`нету скрипта после тега style`);
-}
-
 // проверка наличия пользовательского соглашения
 
 if ( document.forms[0].nextElementSibling.id === 'overlay' ) {
