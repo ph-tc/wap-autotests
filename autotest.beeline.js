@@ -90,13 +90,17 @@
   const price = document.querySelector('.info-block-text .price .line2');
 
   let btnFontSize;
-  let btnText;
 
-  if (btn) {
+  if ( btn ) {
     btnFontSize = parseInt(getComputedStyle(btn.children[0]).fontSize);
-    btnText = btn.querySelector('.activation-btn-text');
   } else {
     console.error(`У кнопки отсутствует id='activation-btn'`);
+  }
+
+  const btnText = btn.querySelector('.activation-btn-text');
+
+  if ( !btnText ) {
+    console.error(`отсутствует класс 'activation-btn-text'`);
   }
 
   let btnTextStyles;
@@ -319,5 +323,5 @@
   console.info(`Проверь закрытые одиночные теги\n<meta/> <link/> <br/> <img/> <input/> !`);
 
   // напоминание base64
-  console.info('Все картинки и шрифты в одном файле в base64');
+  console.info('Проверь все картинки и шрифты в одном файле в base64!');
 })()
