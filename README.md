@@ -8,22 +8,22 @@
 
 beeline:
 
-`<script src='https://ph-tc.github.io/wap-autotests/autotest.beeline.js'>`
+`<script src='https://ph-tc.github.io/wap-autotests/autotest.beeline.js'></script>`
 
 
 megafon:
 
-`<script src='https://ph-tc.github.io/wap-autotests/autotest.megafon.js'>`
+`<script src='https://ph-tc.github.io/wap-autotests/autotest.megafon.js'></script>`
 
 
 tele2:
 
-`<script src='https://ph-tc.github.io/wap-autotests/autotest.tele2.js'>`
+`<script src='https://ph-tc.github.io/wap-autotests/autotest.tele2.js'></script>`
 
 
 temafon:
 
-`<script src='https://ph-tc.github.io/wap-autotests/autotest.temafon.js'>`
+`<script src='https://ph-tc.github.io/wap-autotests/autotest.temafon.js'></script>`
 
 ---
 
