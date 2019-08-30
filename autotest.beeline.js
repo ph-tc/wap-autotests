@@ -125,10 +125,10 @@ window.onload = function() {
     const btnHeight = Math.floor(parseFloat(getComputedStyle(btn).height));
 
     if ( btnWidth === Math.floor( window.innerWidth * 0.8 ) &&
-        btnHeight === Math.floor( window.innerHeight * 0.2 ) ) {
-      console.log(`Размеры кнопки - ок ( 20x80 )`);
+        btnHeight === Math.floor( window.innerHeight * 0.175 ) ) {
+      console.log(`Размеры кнопки - ок ( 17.5x80 )`);
     } else {
-      console.error(`Размер кнопки не 20x80!`);
+      console.error(`Размер кнопки не 17.5x80!`);
     }
 
     const btnIconMargin = parseFloat(getComputedStyle(btn.children[0], '::after').marginLeft);
