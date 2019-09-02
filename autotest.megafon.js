@@ -20,8 +20,8 @@ window.onload = function() {
     const btnHeight = Math.floor(parseFloat(getComputedStyle(btn).height));
 
     if ( btnWidth === Math.floor( window.innerWidth * 0.9 ) &&
-        btnHeight === Math.floor( window.innerHeight * 0.2 ) ) {
-      console.log(`Размеры кнопки - ок ( 20x90 )`);
+        btnHeight === Math.floor( window.innerHeight * 0.175 ) ) {
+      console.log(`Размеры кнопки - ок ( 17.5x90 )`);
     } else {
       console.error(`Размер кнопки не 20x90!`);
     }
