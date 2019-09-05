@@ -52,7 +52,7 @@ window.onload = function() {
 	// проверка верхней оферты
 
 	const offerTop = document.querySelector('.offer');
-	const offerTopPadding = parseInt(getComputedStyle(offerTop).padding;
+	const offerTopPadding = parseInt(getComputedStyle(offerTop).padding);
 	const offerTopBG = getComputedStyle(offerTop).backgroundColor;
 	const offerTopAlign = getComputedStyle(offerTop).textAlign;
 
