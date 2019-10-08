@@ -170,10 +170,9 @@ window.onload = function() {
 
   // проверка футера
 	const footer = document.querySelector('.rules');
-	const footerInner = footer.querySelector('.inner');
-  const footerElems = footer.querySelectorAll('*');
+  	const footerElems = footer.querySelectorAll('*');
 	const footerText = footer.querySelector('p');
-	const footerPadding = parseInt(getComputedStyle(footerInner).padding);
+	const footerPadding = parseInt(getComputedStyle(footer).padding);
 
 	if ( getComputedStyle(footerText).textAlign !== 'center' ) {
 		console.error('Текст в футере не отцентрован');
@@ -181,7 +180,7 @@ window.onload = function() {
 		console.log('Текст в футере отцентрован - ок');
 	}
 
-	if ( getComputedStyle(footerInner).backgroundColor === 'none' ) {
+	if ( getComputedStyle(footer).backgroundColor === 'none' ) {
 		console.error('Футер должен иметь однотонный фон');
 	} else {
 		console.log('Фон в футере - ок');
