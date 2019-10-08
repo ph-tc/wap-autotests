@@ -40,7 +40,7 @@ window.onload = function() {
 			console.error('Атрибут href у кнопки отмены неверный или отсутствует ( должен быть #<TARIF_NO_URL> )');
 		}
 
-		const cancelBtnMargin = parseInt(getComputedStyle(cancelBtn.firstElementChild).marginTop);
+		const cancelBtnMargin = parseInt(getComputedStyle(cancelBtn).marginTop);
 
 		if ( cancelBtnMargin >= 15 && cancelBtnMargin <= 80 ) {
 			console.log(`Расстояние между кнопкой и кнопкой отмены - ок ( ${cancelBtnMargin}px )`);
