@@ -26,15 +26,15 @@ window.onload = function() {
       console.error(`Размер кнопки не 20x90!`);
     }
 
-    const cancelBtn = btn.nextElementSibling;
+    const cancelBtn = document.getElementById('cancel');
 
-		if ( cancelBtn.firstElementChild.tagName === 'A' ) {
+		if ( cancelBtn.tagName === 'A' ) {
 			console.log('Кнопка отмены - ок ( <a> )');
 		} else {
 			console.error('Кнопка отмены не <a>');
 		}
 
-		if ( cancelBtn.firstElementChild.hash === '#%3CTARIF_NO_URL%3E' ) {
+		if ( cancelBtn.hash === '#%3CTARIF_NO_URL%3E' ) {
 			console.log('Атрибут href у кнопки отмены - ок');
 		} else {
 			console.error('Атрибут href у кнопки отмены неверный или отсутствует ( должен быть #<TARIF_NO_URL> )');
