@@ -14,7 +14,7 @@ window.onload = function() {
 
 //	Проверка кнопки
 
-	const btn = document.querySelector('.btn-wrapper .btn');
+	const btn = document.getElementById('btn');
 
 	if ( btn.tagName !== 'A' ) {
 		console.error('Кнопка должна быть <a>');
