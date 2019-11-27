@@ -1,7 +1,7 @@
 window.onload = function() {
 
   // проверка кнопки
-  const btn = document.querySelector('.btn-wrapper #btn');
+  const btn = document.getElementById('#btn');
 
   if ( btn ) {
     if ( btn.tagName === 'A') {
