@@ -1,5 +1,7 @@
 window.onload = function() {
 
+  let formMissingReminder = false;
+
   // проверка наличия определённых ID и классов у тегов
 
   if ( document.getElementById('header-block') ) {
@@ -54,7 +56,7 @@ window.onload = function() {
 
   function detectFonts () {
 
-    let fonts = []
+    let fonts = [];
     for (let node of document.querySelectorAll('*')) {
 
       if (!node.style) continue;
@@ -72,9 +74,7 @@ window.onload = function() {
 
   function checkFonts( fontsArray ) {
     for ( let i = 0; i < fontsArray.length; i++ ) {
-      if ( fontsArray[i] === 'Open Sans' || fontsArray[i] === 'serif' || fontsArray[i] === 'sans-serif' ) {
-        continue;
-      } else {
+      if ( fontsArray[i] !== 'Open Sans' && fontsArray[i] !== 'sans-serif' ) {
         console.error(`Используется кастомный шрифт!`);
         return;
       }
@@ -86,59 +86,98 @@ window.onload = function() {
 
 
   // проверка кнопки
-  const btn = document.getElementById('activation-btn');
-  const price = document.querySelector('.info-block-text .price .line2');
+  let btn;
 
-  let btnFontSize;
+  if ( document.getElementById('activation-btn') ) {
+    btn = document.getElementById('activation-btn');
 
-  if ( btn ) {
-    btnFontSize = parseInt(getComputedStyle(btn.children[0]).fontSize);
-  } else {
-    console.error(`У кнопки отсутствует id='activation-btn'`);
-  }
-
-  const btnText = btn.querySelector('.activation-btn-text');
-
-  if ( !btnText ) {
-    console.error(`отсутствует класс 'activation-btn-text'`);
-  }
-
-  let btnTextStyles;
-  if (btnText) {
-    btnTextStyles = getComputedStyle(btnText);
-  }
-
-  if ( btn && btnText ) {
-    if ( btn && btn.tagName === 'BUTTON') {
+    if ( btn.tagName === 'BUTTON' ) {
       console.log(`Кнопка - ок ( button )`);
     } else {
       console.error(`Кнопка - не button!`);
     }
 
-    if ( btnFontSize >= 32 ) {
+    // проверка текста в кнопке
+    let btnText;
+    let btnFontSize;
+
+    if ( btn.querySelector('.activation-btn-text') ) {
+      btnText = btn.querySelector('.activation-btn-text');
+      btnFontSize = parseInt(getComputedStyle(btnText).fontSize);
+    } else {
+      console.error(`отсутствует класс 'activation-btn-text'`);
+    }
+
+    if ( btn && btnText && btnFontSize >= 32 ) {
       console.log(`Шрифт на кнопке - ок ( ${ btnFontSize }px )`);
+    } else if ( !btnText ) {
+      console.error(`Отсутствует текст на кнопке`);
     } else {
       console.error(`Шрифт на кнопке меньше 32px!`);
     }
 
-    const btnWidth = Math.floor(parseFloat(getComputedStyle(btn).width));
-    const btnHeight = Math.floor(parseFloat(getComputedStyle(btn).height));
+    // проверка атрибута текста на кнопке
+    if ( btnText ) {
+      const btnTextAttr = btnText.getAttribute('th:text');
+      const btnTextAttrValue = "${useSmsLink == null || useSmsLink == 'false' ? '" + btnText.innerText + "' : 'Получить SMS' }";
+
+      if ( btnTextAttr === btnTextAttrValue ) {
+        console.log(`Атрибут у текста на кнопке - ок`);
+      } else {
+        console.error(`Атрибут th:text у текста на кнопке отсутствует`);
+      }
+    }
+
+    // проверка размеров кнопки
+    let btnWidth;
+    let btnHeight;
+
+    btnWidth = Math.floor(parseFloat(getComputedStyle(btn).width));
+    btnHeight = Math.floor(parseFloat(getComputedStyle(btn).height));
 
     if ( btnWidth === Math.floor( window.innerWidth * 0.8 ) &&
-        btnHeight === Math.floor( window.innerHeight * 0.175 ) ) {
+      btnHeight === Math.floor( window.innerHeight * 0.175 ) ) {
       console.log(`Размеры кнопки - ок ( 17.5x80 )`);
     } else {
       console.error(`Размер кнопки не 17.5x80!`);
     }
 
-    const btnIconMargin = parseFloat(getComputedStyle(btn.children[0], '::after').marginLeft);
+    // проверка иконки на кнопке
+    if ( btnText ) {
+      const btnIconMargin = parseFloat(getComputedStyle(btnText, '::after').marginLeft);
 
-    if ( btnIconMargin >= 7 ) {
-      console.log(`Расстояние иконки до текста  - ок ( ${btnIconMargin}px )`);
+      if ( btnIconMargin >= 7 ) {
+        console.log(`Расстояние иконки до текста  - ок ( ${btnIconMargin}px )`);
+      } else {
+        console.error(`Расстояние иконки до текста меньше 7px`);
+      }
     } else {
-      console.error(`Расстояние иконки до текста меньше 7px`);
+      console.error(`Отсутствует текст на кнопке`);
     }
 
+    // проверка центровки текста на кнопке
+    let btnTextStyles;
+    if ( btnText ) {
+      btnTextStyles = getComputedStyle(btnText);
+
+      if ( btnTextStyles.transform !== 'translate(-50%, -50%)' &&
+        btnTextStyles.position !== 'absolute' &&
+        btnTextStyles.top !== '50%' &&
+        btnTextStyles.left !== '50%' ) {
+        console.error(`текст на центральной кнопке не отцентрован`);
+      } else {
+        console.log(`текст на центральной кнопке отцентрован - ок`);
+      }
+    } else {
+      console.error(`Отсутствует текст на кнопке`);
+    }
+  } else {
+    console.error(`отсутствует кнопка или id='activation-btn' у кнопки`);
+  }
+
+  // проверка цены
+  if (document.querySelector('.info-block-text .price .line2')) {
+    let price = document.querySelector('.info-block-text .price .line2');
     const priceFontSize = parseInt(getComputedStyle(price).fontSize);
 
     if ( priceFontSize >= 22 ) {
@@ -162,32 +201,28 @@ window.onload = function() {
     } else {
       console.error(`Непрозрачный фон у цены отсутствует`);
     }
-
-    if ( !btnText ) {
-      console.error(`отсутствует элемент с классом "activation-btn-text"`);
-    } else if ( btnTextStyles.transform !== 'translate(-50%, -50%)' && btnTextStyles.position !== 'absolute' && 		btnTextStyles.top !== '50%' && btnTextStyles.left !== '50%' ) {
-      console.error(`текст на центральной кнопке не отцентрован`);
-    } else {
-      console.log(`текст на центральной кнопке отцентрован - ок`);
-    }
+  } else {
+    console.error(`Отсутствует цена под кнопкой`);
   }
 
   // проверка футера
   const footerElems = document.querySelectorAll('#footer-block *');
+  let footerElemsFontCheck = true;
 
-  (function checkFooter() {
-    for (let i = 0; i < footerElems.length; i++) {
-      let footerElemFontSize = parseInt(getComputedStyle(footerElems[i]).fontSize);
-      if ( footerElemFontSize < 16 ) {
-        console.error(`Размер шрифта в футере меньше 16px`);
-        return;
-      }
+  for (let i = 0; i < footerElems.length; i++) {
+    let footerElemFontSize = parseInt(getComputedStyle(footerElems[i]).fontSize);
+    if ( footerElemFontSize < 16 ) {
+      console.error(`Размер шрифта в футере меньше 16px`);
+      footerElemsFontCheck = false;
+      break;
     }
+  }
+
+  if ( footerElemsFontCheck ) {
     console.log(`Размер шрифта в футере - ок`);
-  })()
+  }
 
   // проверка head
-
   const head = document.querySelector('head');
   const title = "<title th:text=\"${isWebRequest} == false ? 'Подтверждение оплаты с баланса телефона' : 'Подтверждение оплаты с баланса телефона шаг 2 из 2'\">Подтверждение оплаты с баланса телефона</title>";
   const headMeta1 = "<meta th:if=\"${isWebRequest} == false\" name=\"viewport\" content=\"width=device-width,initial-scale=1,user-scalable=no\">";
@@ -195,39 +230,40 @@ window.onload = function() {
   const headMeta3 = "<meta th:if=\"${isWebRequest} == false\" name=\"HandheldFriendly\" content=\"true\">";
   const headMeta4 = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">";
 
-  (function checkHead() {
-    const headMetas = head.querySelectorAll('meta');
-    const headTitle = head.querySelector('title');
+  const headMetas = head.querySelectorAll('meta');
+  const headTitle = head.querySelector('title');
+  let headMetasCounter = 0;
 
-    for (let i = 0; i < headMetas.length; i++) {
-      if ( headMetas[i].outerHTML === headMeta1 || headMetas[i].outerHTML === headMeta2 || headMetas[i].outerHTML === headMeta3 || headMetas[i].outerHTML === headMeta4 ) {
-        continue;
-      } else {
-        console.error('Неверные meta-теги в head! Скопировать из референса билайн');
-        return;
-      }
+  for (let i = 0; i < headMetas.length; i++) {
+    if ( headMetas[i].outerHTML === headMeta1 || headMetas[i].outerHTML === headMeta2 || headMetas[i].outerHTML === headMeta3 || headMetas[i].outerHTML === headMeta4 ) {
+      headMetasCounter++;
     }
+  }
 
+  if ( headMetasCounter === 4 ) {
     console.log('Метатеги верные');
+  } else {
+    console.error('Неверные meta-теги в head! Скопировать из референса билайн');
+  }
 
-    if ( headTitle.outerHTML !== title ) {
-      console.error('Неверный <title> в head! Скопировать из референса билайн');
-    } else {
-      console.log('<title> верный');
-    }
-  })()
+  if ( headTitle.outerHTML !== title ) {
+    console.error('Неверный <title> в head! Скопировать из референса билайн');
+  } else {
+    console.log('<title> верный');
+  }
 
 
   // проверка формы в теле body
-
   if ( document.body.firstElementChild === document.forms[0] ) {
     console.log('Форма в body есть - ок!');
   } else {
-    console.error('Отсутствует форма в body!');
+    if ( !formMissingReminder ) {
+      formMissingReminder = true;
+      console.error('Отсутствует форма в body!');
+    }
   }
 
   // проверка аттрибутов тега body
-
   if ( document.body.id !== 'resize' ) {
     console.error(`ID у body дожен быть "resize"`);
   } else if ( !document.body.classList.contains('background') ) {
@@ -236,39 +272,40 @@ window.onload = function() {
     console.log(`класс и id у body - ок`);
   }
 
-  const attrs = document.body.attributes;
-
-  for ( let i = 0; i < attrs.length; i++ ) {
-    if ( attrs[i].name !== 'th:if' && attrs[i].value !== '${isWebRequest} == false' && i === attrs.length - 1 ) {
-      console.error(`отсутствует макрос на теге body`);
-    } else if ( attrs[i].name !== 'th:if' && attrs[i].value !== '${isWebRequest} == false' ) {
-      continue
-    } else if ( attrs[i].name === 'th:if' && attrs[i].value === '${isWebRequest} == false' ) {
-      console.log(`макрос на теге body - ок`);
-      break;
-    }
+  const bodyThAttr = document.body.getAttribute('th:if');
+  if ( bodyThAttr === '${isWebRequest} == false' ) {
+    console.log('Атрибут у body - ок')
+  } else {
+    console.error('У body должен присутствовать атрибут th:if="${isWebRequest}" == false')
   }
 
-  // проверка наличия кнопок в LP
 
+  // проверка наличия кнопок в LP
   const btns = document.querySelectorAll('button');
 
-  if ( btns.length !== 1 ) {
+  if ( !btns.length ) {
+    console.error(`Отсутствует кнопка`)
+  } else if ( btns.length !== 1 && btns[0].id !== 'activation-btn' ) {
     console.error(`В lp только центральная кнопка должна быть BUTTON, остальные все - div`);
   } else {
-    console.log(`Одна кнопка на странице - ок`);
+    console.log(`Только центральная кнопка - BUTTON - ок`)
   }
 
   // проверка наличия пользовательского соглашения
-
-  if ( document.forms[0].nextElementSibling.id === 'overlay' ) {
-    console.log(`имеется пользовательское соглашение - ок`);
+  if ( document.forms[0] ) {
+    if ( document.forms[0].nextElementSibling.id === 'overlay' ) {
+      console.log(`имеется пользовательское соглашение - ок`);
+    } else {
+      console.error(`отсутсвует пользовательское соглашение`);
+    }
   } else {
-    console.error(`отсутсвует пользовательское соглашение`);
+    if ( !formMissingReminder ) {
+      formMissingReminder = true;
+      console.error('отсутствует форма в body!');
+    }
   }
 
   // проверка макросов в футере
-
   const footerSpans = document.querySelectorAll('#footer-block span');
   const footerTel = document.querySelector('#footer-block .tel');
 
@@ -305,7 +342,7 @@ window.onload = function() {
     }
   }
 
-  if ( telMacroses == 2 ) {
+  if ( telMacroses === 2 ) {
     console.log(`макросы в футере у телефона - ок`);
   } else {
     console.error(`отсутствует макрос в футере у телефона`);
@@ -324,4 +361,4 @@ window.onload = function() {
 
   // напоминание base64
   console.info('Проверь все картинки и шрифты в одном файле в base64!');
-}
+};
