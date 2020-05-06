@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Билайн</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta th:replace="fragment/styles"/>
+    </head>
+    <body>
+        <div class="content_block_top" th:classappend="${!isWebRequest} ? 'wap'">
+            <div class="caption" th:if="${errParentBlocked == true or errParentDeny == true}">У вас подключена услуга Родительский контроль</div>
+            <div class="caption" th:if="${errParentBlocked == null and errParentDeny == null}">Ошибка выполнения запроса</div>
+        </div>
+        <div class="content_block_middle" th:classappend="${!isWebRequest} ? 'wap'">
+            <br/>
+            <div th:replace="fragment/errors"></div>
+            <br/>
+            <br/>
+            <div style="text-align: center">
+                <a href="back" class="info" onclick="history.back(); return false;">Вернуться на сайт провайдера</a>
+            </div>
+        </div>
+
+        <div class="content_block_bottom" th:classappend="${!isWebRequest} ? 'wap'">
+            <br/>
+            <br/>
+            <br/>
+        </div>
+    </body>
+</html>

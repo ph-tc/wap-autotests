@@ -1,0 +1,15 @@
+
+<tr th:if="${useCaptcha} == true">
+    <td class="label-column"><label for="answer">Введите цифры, показанные на картинке</label></td>
+    <td style="width: 150px;">
+        <input type="hidden" name="repeatCaptcha" value="false" />
+        <img id="capchaimage" th:src="@{captcha(sessionId=${session_id})}" style="margin-bottom: 5px; background-color: white" height="50px" />
+        <div class="center">
+            <a href="javascript:mainFrm.repeatCaptcha.value = 'true';javascript: document.mainFrm.submit();"
+                class="info">Обновить код</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </td>
+    <td>
+        <input id="answer" style="width: 50px;" type="text" name="answer" />
+    </td>
+</tr>

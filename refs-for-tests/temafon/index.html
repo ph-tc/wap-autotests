@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="MobileOptimized" content="width" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<style type="text/css">
+		html {
+			line-height: 1.15; /* video */
+			-webkit-text-size-adjust: 100%; /* files */
+		}
+
+		a {
+			background-color: transparent;
+		}
+
+		button,
+		input,
+		optgroup,
+		select,
+		textarea {
+			font-family: inherit; /* video */
+			font-size: 100%; /* video */
+			line-height: 1.15; /* video */
+			margin: 0; /* files */
+		}
+
+		button,
+		input { /* video */
+			overflow: visible;
+		}
+
+		button,
+		select { /* video */
+			text-transform: none;
+		}
+
+		button,
+		[type="button"],
+		[type="reset"],
+		[type="submit"] {
+			-webkit-appearance: button;
+		}
+
+		button::-moz-focus-inner,
+		[type="button"]::-moz-focus-inner,
+		[type="reset"]::-moz-focus-inner,
+		[type="submit"]::-moz-focus-inner {
+			border-style: none;
+			padding: 0;
+		}
+
+		button:-moz-focusring,
+		[type="button"]:-moz-focusring,
+		[type="reset"]:-moz-focusring,
+		[type="submit"]:-moz-focusring {
+			outline: 1px dotted ButtonText;
+		}
+
+		[type="checkbox"],
+		[type="radio"] {
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box; /* video */
+			padding: 0; /* files */
+		}
+
+		[type="search"] {
+			-webkit-appearance: textfield; /* video */
+			outline-offset: -2px; /* files */
+		}
+
+		/* GLOBAL */
+
+		*,
+		*::before,
+		*::after {
+			margin: 0;
+			padding: 0;
+			-webkit-box-sizing: inherit;
+			box-sizing: inherit;
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		html {
+			width: 100%;
+			height: 100%;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+		}
+
+		body {
+			display: table;
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			font-family: 'Open Sans', sans-serif;
+			-ms-text-size-adjust: 100%;
+			-moz-text-size-adjust: 100%;
+			-webkit-text-size-adjust: 100%;
+			background-color: #2b2d42;
+			overflow: hidden;
+		}
+
+		/*HEADER*/
+
+		.header {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		.header .inner {
+			position: relative;
+			display: table;
+			width: 100%;
+			padding: 5px;
+			text-align: center;
+		}
+
+		.header .inner * {
+			vertical-align: middle;
+		}
+
+		.header .inner > div {
+			display: table-cell;
+		}
+
+		.header .logo div {
+			width: 40px;
+			height: 40px;
+			background-image: url("img/lens.png");
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+			-webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+			filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+		}
+
+		.header .title {
+			width: 100%;
+			padding: 5px 0;
+			font-size: 20px;
+			line-height: 1;
+			font-weight: bold;
+			color: #eee;
+			text-align: center;
+			-webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+			filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+		}
+
+		.header .age-limit div {
+			width: 40px;
+			height: 40px;
+			background-image: url('img/plus-18.png');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+			-webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+			filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+		}
+
+		/*MAIN*/
+
+		.main {
+			display: table-row;
+			height: 100%;
+		}
+
+		.main > .inner {
+			position: relative;
+			display: table;
+			height: 100%;
+			width: 100%;
+			padding: 0 0 10px;
+		}
+
+		@media screen and (max-height: 460px) {
+			.main > .inner {
+				padding-bottom: 0;
+			}
+		}
+
+		/*Player*/
+
+		.player {
+			display: table-row;
+			height: 100%;
+		}
+
+		.player .inner {
+			position: relative;
+			width: 95vw;
+			height: 100%;
+			margin: 0 auto;
+			background-color: #000;
+		}
+
+		.player .inner::after,
+		.player .inner::before {
+			content: '';
+			position: absolute;
+			display: block;
+			border: 10px solid #2b2d42;
+			z-index: 2;
+		}
+
+		.player .inner::after {
+			top: 0;
+			left: 0;
+			border-right-color: transparent;
+			border-bottom-color: transparent;
+		}
+
+		.player .inner::before {
+			bottom: 0;
+			right: 0;
+			border-left-color: transparent;
+			border-top-color: transparent;
+		}
+
+		@media screen and (max-height: 460px) {
+			.player .inner {
+				width: 100%;
+			}
+
+			.player .inner::after,
+			.player .inner::before {
+				display: none;
+			}
+		}
+
+		/*Rating*/
+
+		.rating {
+			position: absolute;
+			top: 10px;
+			left: 20px;
+			list-style: none;
+			font-size: 0;
+		}
+
+		.rating-star {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background-image: url('img/star.png');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+			-webkit-filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+			filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+		}
+
+		.rating-star:last-child {
+			background-image: url('img/star-half.png');
+		}
+
+		.rating-star + .rating-star {
+			margin-left: 2px;
+		}
+
+		@media screen and (max-height: 290px) {
+			.rating {
+				display: none;
+			}
+		}
+
+		/*Controls*/
+
+		.controls {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			background-color: #000;
+		}
+
+		.controls .line {
+			position: relative;
+			padding: 5px 10px;
+		}
+
+		.controls .line div {
+			position: relative;
+			width: 100%;
+			height: 4px;
+			background-color: #8d99ae;
+			opacity: 0.7;
+		}
+
+		.controls .line div::after,
+		.controls .line div::before {
+			content: '';
+			position: absolute;
+			display: block;
+			border: 2px solid #000;
+		}
+
+		.controls .line div::after {
+			top: 0;
+			left: 0;
+			border-right-color: transparent;
+			border-bottom-color: transparent;
+		}
+
+		.controls .line div::before {
+			top: 0;
+			right: 0;
+			border-left-color: transparent;
+			border-top-color: transparent;
+		}
+
+		.controls-bottom {
+			display: table;
+			padding: 5px 30px 10px;
+		}
+
+		.controls-bottom > div {
+			display: table-cell;
+		}
+
+		.controls-bottom > div div {
+			width: 20px;
+			height: 20px;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+		}
+
+		.controls-bottom .play div {
+			margin-right: 10px;
+			background-image: url('img/play-white.png');
+		}
+
+		.controls-bottom .pause div {
+			background-image: url('img/pause.png');
+		}
+
+		.controls-bottom .placeholder {
+			width: 100%;
+		}
+
+		.controls-bottom .fullscreen div {
+			background-image: url('img/fullscreen.png');
+		}
+
+		@media screen and (max-height: 460px) {
+			.controls {
+				display: none;
+			}
+		}
+
+		/*BUTTON*/
+
+		.main .btn-wrapper {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			-webkit-transform: translate(0, -50%);
+			-ms-transform: translate(0, -50%);
+			transform: translate(0, -50%);
+			width: 100%;
+			font-size: 0;
+			text-align: center;
+			z-index: 1000;
+		}
+
+		.main .heading {
+			position: absolute;
+			bottom: 100%;
+			left: 50%;
+			-webkit-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
+			transform: translateX(-50%);
+			margin-bottom: 35px;
+			font-size: 32px;
+			line-height: 1;
+			font-weight: bold;
+			color: #edf2f4;
+			letter-spacing: -2px;
+		}
+
+		.main .btn {
+			position: relative;
+			display: inline-block;
+			width: 80vw;
+			height: 25vh;
+			text-decoration: none;
+			text-align: center;
+			background-color: #edf2f4;
+			border: none;
+			border-radius: 10px;
+			-webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+			filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+			z-index: 3;
+		}
+
+		.main .btn > span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			font-family: 'Open Sans', sans-serif;
+			font-size: 32px;
+			font-weight: bold;
+			line-height: 32px;
+			color: #2b2d42;
+			text-shadow: 0 4px 7px rgba(0, 0, 0, 0.31);
+			letter-spacing: -1px;
+		}
+
+		.main .btn > span::after {
+			position: absolute;
+			bottom: 0;
+			left: 100%;
+			content: '';
+			display: block;
+			width: 24px;
+			height: 28px;
+			margin-left: 9px;
+			background-image: url('img/play.png');
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			-webkit-filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.31));
+			filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.31))
+		}
+
+		.main .btn + div {
+			position: absolute;
+			top: 100%;
+			width: 100%;
+			text-align: center;
+		}
+
+		.main .price span {
+			display: none;
+		}
+
+		.main .price span:first-child {
+			display: inline-block;
+		}
+
+		.main .price .line2 {
+			display: inline-block;
+			margin: 5px auto 0;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 17px;
+			font-weight: normal;
+			line-height: 17px;
+			background-color: #000;
+			color: #9a9292;
+		}
+
+		@media screen and (max-height: 260px) and (orientation: landscape) {
+			.main .btn-wrapper {
+				top: auto;
+				bottom: 75px;
+				-webkit-transform: translate(0, -27px);
+				-ms-transform: translate(0, -27px);
+				transform: translate(0, -27px);
+			}
+		}
+
+		@media screen and (max-height: 600px) {
+			.main .heading {
+				display: none;
+			}
+		}
+
+		/*FOOTER*/
+
+		.rules {
+			display: table-row;
+			margin-top: 10px;
+		}
+
+		.rules .inner {
+			position: relative;
+			padding: 2px;
+			font-family: 'Open Sans', sans-serif;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 0.9;
+			text-align: center;
+			color: #9a9292;
+			letter-spacing: -0.5px;
+		}
+
+		.rules div.footer-text:nth-child(2) span,
+		.rules div.footer-text:nth-child(2) a {
+			display: block;
+		}
+
+		.rules span,
+		.rules a {
+			display: inline-block;
+			font-family: 'Open Sans', sans-serif;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 0.9;
+			text-align: center;
+			color: #9a9292;
+			letter-spacing: -0.5px;
+		}
+	</style>
+	<title>Видео онлайн</title>
+</head>
+
+<body>
+<div class="header" id="header-block">
+	<div class="inner blured">
+		<div class="logo">
+			<div></div>
+		</div>
+		<div class="title header-text">ВидеоОнлайн</div>
+		<div class="age-limit">
+			<div></div>
+		</div>
+	</div>
+</div>
+
+<div class="main" id="main-block">
+	<div class="inner blured">
+		<div class="player">
+			<div class="inner">
+				<ul class="rating">
+					<li class="rating-star"></li>
+					<li class="rating-star"></li>
+					<li class="rating-star"></li>
+					<li class="rating-star"></li>
+					<li class="rating-star"></li>
+				</ul>
+				<div class="controls">
+					<div class="line">
+						<div></div>
+					</div>
+					<div class="controls-bottom">
+						<div class="play">
+							<div></div>
+						</div>
+						<div class="pause">
+							<div></div>
+						</div>
+						<div class="placeholder"></div>
+						<div class="fullscreen">
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="btn-wrapper" id="btn-wrapper">
+		<div class="heading">Приятного просмотра</div>
+		<a class="btn" id="btn" href="{{ url }}">
+			<span class="activation-btn-text">Смотреть</span>
+		</a>
+		<div class="price">
+			<p>
+				<span class="line2">доступ: 20 руб. в день</span>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="rules" id="footer-block">
+	<div class="inner blured">
+		<p>Нажимая кнопку вы подписываетесь на услугу "Настроение 2". Стоимость подписки - 20 рублей в день. Отключить подписку вы можете бесплатно в любой момент. <a href="http://mob.beeline.ru/subscr/reg/tune">Пользовательское соглашение</a></p>
+	</div>
+</div>
+</body>
+</html>

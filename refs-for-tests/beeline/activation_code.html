@@ -1,0 +1,14 @@
+<tr th:if="${isWebRequest} == true">
+
+	<center>
+    <td class="label-column"><label for="code">Введите код подтверждения, отправленный в SMS</label></td>
+    <td><input id="code" name="activationCode" type="text" th:value="${activationCode}" /></td>
+	</center>
+</tr>
+
+<tr th:if="${isWebRequest} == true">
+	<center>
+    <td>&nbsp;</td>
+    <td><a href="javascript:mainFrm.repeatCode.value = 'true';javascript: document.mainFrm.submit();" class="info">Выслать SMS повторно</a></td>
+	</center>
+</tr>
