@@ -121,7 +121,7 @@ window.onload = function() {
       const btnTextAttr = btnText.getAttribute('th:text');
       const btnTextAttrValue = "${useSmsLink == null || useSmsLink == 'false' ? '" + btnText.innerText + "' : 'Получить SMS' }";
 
-      if ( btnTextAttr === btnTextAttrValue ) {
+      if ( btnTextAttr.toLowerCase() === btnTextAttrValue.toLowerCase() ) {
         console.log(`Атрибут у текста на кнопке - ок`);
       } else {
         console.error(`Атрибут th:text у текста на кнопке отсутствует`);
